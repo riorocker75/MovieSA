@@ -15,6 +15,7 @@ return new class extends Migration
             Schema::create('tag', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->text('nama')->nullable();
+                $table->text('slug')->nullable();
                 $table->text('desc')->nullable();
                 $table->text('status')->nullable();
               

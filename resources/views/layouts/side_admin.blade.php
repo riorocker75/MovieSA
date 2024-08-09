@@ -49,13 +49,15 @@
               <span class="pc-micon">
                 <i class="ph-duotone ph-layout"></i>
               </span>
-              <span class="pc-mtext">Data Barang</span>
+              <span class="pc-mtext">Post</span>
               <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
             </a>
             <ul class="pc-submenu">
-              <li class="pc-item"><a class="pc-link" href="#">Tambah Barang</a></li>
-              <li class="pc-item"><a class="pc-link" href="#">Barang Masuk</a></li>
-              <li class="pc-item"><a class="pc-link" href="#">Barang Keluar</a></li>
+              <li class="pc-item"><a class="pc-link" href="{{url('/dashboard/admin/all/post')}}">Semua Post</a></li>
+              <li class="pc-item"><a class="pc-link" href="#">New Movie Post</a></li>
+              <li class="pc-item"><a class="pc-link" href="#">New Blog Post</a></li>
+              <li class="pc-item"><a class="pc-link" href="#">Categori</a></li>
+
             </ul>
           </li>
           {{-- <li class="pc-item pc-caption">
@@ -67,9 +69,9 @@
           <li class="pc-item">
             <a href="#" class="pc-link">
               <span class="pc-micon">
-                <i class="ph-duotone ph-identification-card"></i>
+                <i class="ph-duotone ph-users-three"></i>
               </span>
-              <span class="pc-mtext">Transaksi</span>
+              <span class="pc-mtext">User</span>
             </a>
           </li>
           <li class="pc-item">

@@ -11,14 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('category')) {
-            Schema::create('category', function (Blueprint $table) {
+       
+        if(!Schema::hasTable('post')) {
+            Schema::create('post', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->text('nama')->nullable();
+                $table->text('judul')->nullable();
                 $table->text('slug')->nullable();
+                $table->text('poster')->nullable();
                 $table->text('desc')->nullable();
+                $table->date('tgl')->nullable();
+                $table->text('cat_id')->nullable();
+                $table->text('tag_id')->nullable();
+                $table->text('rev_id')->nullable();
                 $table->text('status')->nullable();
-              
             });
         };
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('post');
     }
 };

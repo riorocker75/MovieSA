@@ -17,6 +17,7 @@ class Cat_seed extends Seeder
         Category::create([
           'id' => 1,
           'nama' => "Uncategorized",
+          'slug' => "uncategorized",
           'desc' =>"",
           'status'=> 1
         ]);

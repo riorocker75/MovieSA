@@ -14,10 +14,12 @@ return new class extends Migration
         if(!Schema::hasTable('film')) {
             Schema::create('film', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->text('nama')->nullable();
+                $table->text('judul')->nullable();
+                $table->text('slug')->nullable();
                 $table->text('poster')->nullable();
                 $table->text('trailer')->nullable();
                 $table->text('desc')->nullable();
+                $table->date('tgl')->nullable();
                 $table->text('cat_id')->nullable();
                 $table->text('tag_id')->nullable();
                 $table->text('rev_id')->nullable();
