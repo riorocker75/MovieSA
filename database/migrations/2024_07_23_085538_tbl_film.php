@@ -16,10 +16,13 @@ return new class extends Migration
                 $table->bigIncrements('id');
                 $table->text('judul')->nullable();
                 $table->text('slug')->nullable();
+                $table->text('cast')->nullable();
                 $table->text('poster')->nullable();
                 $table->text('trailer')->nullable();
                 $table->text('desc')->nullable();
                 $table->date('tgl')->nullable();
+                $table->text('tag')->nullable();
+                $table->text('genre')->nullable();
                 $table->text('cat_id')->nullable();
                 $table->text('tag_id')->nullable();
                 $table->text('rev_id')->nullable();

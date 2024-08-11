@@ -35,6 +35,8 @@ Route::middleware(['adminLogin'])->group(function () {
 
     // user`
 
+    Route::post('/dashboard/admin/ajax/hapus-eps', [AdminCtrl::class,'hapus_eps']);
+    Route::post('/dashboard/admin/ajax/hapus-cover', [AdminCtrl::class,'hapus_cover']);
 
     
 

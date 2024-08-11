@@ -21,7 +21,7 @@ return new class extends Migration
                 $table->text('desc')->nullable();
                 $table->date('tgl')->nullable();
                 $table->text('cat_id')->nullable();
-                $table->text('tag_id')->nullable();
+                $table->text('tag')->nullable();
                 $table->text('rev_id')->nullable();
                 $table->text('status')->nullable();
             });

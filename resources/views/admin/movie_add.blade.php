@@ -71,7 +71,7 @@
         </div>
         
 
-        <div class="col-md-4 col-sm-12">
+        <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card">
                 <div class="card-header">
                    
@@ -107,6 +107,34 @@
                             
                         </select>
                       </div>
+
+                      <div class="form-group ">
+                        <label class="form-label">Genre</label>
+                       
+                          <input
+                            class="form-control"
+                            id="genre"
+                            type="text"
+                            placeholder="Enter something"
+                            name="genre"
+                         >
+                      </div>
+
+                      <div class="form-group ">
+                        <label class="form-label">Tags</label>
+                       
+                          <input
+                            class="form-control"
+                            id="tag"
+                            type="text"
+                            placeholder="Enter something"
+                            name="tag"
+                         >
+                      </div>
+
+
+
+
                       </div>
 
                     </div>
@@ -133,6 +161,31 @@
         });
         $(document).on('click', '.remove-input-field', function () {
             $(this).parents('tr').remove();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+          var genericExamples = document.querySelectorAll('[data-trigger]');
+        for (i = 0; i < genericExamples.length; ++i) {
+          var element = genericExamples[i];
+          new Choices(element, {
+            placeholderValue: 'This is a placeholder set in the config',
+            searchPlaceholderValue: 'This is a search placeholder'
+          });
+        }
+
+        var textRemove = new Choices(document.getElementById('tag'), {
+          delimiter: ',',
+          editItems: true,
+          maxItemCount: 7,
+          removeItemButton: true
+        });
+        var textRemove = new Choices(document.getElementById('genre'), {
+          delimiter: ',',
+          editItems: true,
+          maxItemCount: 7,
+          removeItemButton: true
+        });
+
         });
     </script>
 

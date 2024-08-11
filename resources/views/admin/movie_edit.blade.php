@@ -36,6 +36,7 @@
                   <div class="card-body">
                     <div class="form-group">
                         <label class="form-label">Judul</label>
+                        <input type="hidden" value="{{$dt->id}}" name="id" id="idFilm" required>
                         <input type="text" class="form-control" placeholder="isikan judul movie.." value="{{$dt->judul}}" name="judul" required>
                       </div>
 
@@ -60,17 +61,54 @@
                         </tr>
                        
                       <tr>
-                       
-                          <td>
-                            @foreach ($data_sub as $ds)
-                             <textarea name="video[0][subjek]" class="form-control" id="" cols="18" rows="2" placeholder="isikan embed kode disini." required>{!!$ds->video!!}</textarea><br>
-                             @endforeach
-                         
-                            </td>
+                       @php
+                           $eps= App\Models\FilmSub::where('film_id',$dt->id)->orderBy('id','desc')->limit(1)->get();
+                       @endphp
 
-                          <td><button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">Tambah Episode</button></td>
-                          
+                         
+                          <td>
+                            @foreach ($data_sub as $index => $ds)
+                            <label class="form-label">Episode {{$ds->eps}}</label> <a id="hapusEps-{{$ds->id}}" class="badge bg-danger">Hapus</a>
+                            <input type="hidden" name="idEps" value="{{$ds->id}}" id="idEps-{{$ds->id}}">  
+                            <input type="hidden" name="vEps" value="{{$ds->eps}}" id="vEps-{{$ds->eps}}"> 
+                            <input type="hidden" name="id_embed[{{ $index }}]" value="{{$ds->id}}">
+                             <textarea name="video[{{ $index }}][subjek]" class="form-control"  cols="18" rows="2" placeholder="isikan embed kode disini." required>{!!$ds->video!!}</textarea><br>
+                             
+                             <script>
+                                    $('#hapusEps-{{ $ds->id }}').click(function(){
+                                      var kode=  $('#idEps-{{ $ds->id }}').val();
+                                      var eps=  $('#vEps-{{ $ds->eps }}').val();
+
+                                      var confirmed = confirm("Kamu yakin menghapus Episode "+eps);
+                                      if (confirmed) {
+                                        $.ajax({
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                },
+                                            type:"post",
+                                            url:"/dashboard/admin/ajax/hapus-eps",
+                                            data:{kode:kode},
+                                            success: function(data){          
+                                              location.reload(data);
+                                                // console.log('Server response:',data);
+                                            }
+                                          
+                                        });
+                                      }
+                                        
+                                    });
+                             </script>
+                             @endforeach
+                            
+                            </td>
+                            
+                           @foreach ($eps as $es)
+                           <input type="hidden" name="eps" value="{{$es->eps}}">
+                           @endforeach
+                           
                         </tr>
+                        <td><button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">Tambah Episode</button></td>
+
                     </table>
                       
 
@@ -96,11 +134,44 @@
                           <option value="21">21+</option>
                         </select>
                       </div>
-
-                    <div class="form-group">
+                      @if ($dt->poster == "")
+                      <div class="form-group">
                         <label class="form-label">Upload Cover Film</label>
                         <input type="file" class="form-control"  name="cover">
-                      </div> 
+                      </div>
+                      @endif 
+                     
+                      @if ($dt->poster != "")
+                      <div class="form-group" id="coverFIlm">
+                      
+                        <img src="{{asset('upload/'.$dt->poster.'')}}" style="width:80px;height:80px">
+                        <br><a id="ubahCover" class="btn btn-outline-danger">Ubah Cover</a>
+                      </div>
+                      @endif 
+
+                      <script>
+                        $('#ubahCover').click(function(){
+                          var cover=  $('#idFilm').val();
+
+                          var confirmed = confirm("Kamu yakin menghapus dan merubah Cover ini? ");
+                          if (confirmed) {
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                type:"post",
+                                url:"/dashboard/admin/ajax/hapus-cover",
+                                data:{cover:cover},
+                                success: function(data){          
+                                  location.reload(data);
+                                  
+                                }
+                              
+                            });
+                          }
+                            
+                        });
+                 </script>
                       
                       
                       <div class="form-group">
@@ -118,6 +189,47 @@
                             
                         </select>
                       </div>
+
+                      <div class="form-group ">
+                        <label class="form-label">Cast Pemain</label>
+                       
+                          <input
+                            class="form-control"
+                            id="cast"
+                            type="text"
+                            placeholder="Enter something"
+                            name="cast"
+                            value="{{$dt->cast}}"
+                         >
+                      </div>
+                      <div class="form-group ">
+                        <label class="form-label">Genre</label>
+                       
+                          <input
+                            class="form-control"
+                            id="genre"
+                            type="text"
+                            placeholder="Enter something"
+                            name="genre"
+                            value="{{$dt->genre}}"
+                         >
+                      </div>
+
+                      <div class="form-group ">
+                        <label class="form-label">Tags</label>
+                       
+                          <input
+                            class="form-control"
+                            id="tag"
+                            type="text"
+                            placeholder="Enter something"
+                            name="tag"
+                            value="{{$dt->tag}}"
+
+                         >
+                      </div>
+
+
                       </div>
 
                     </div>
@@ -138,12 +250,45 @@
         var i = 0;
         $("#dynamic-ar").click(function () {
             ++i;
-            $("#dynamicAddRemove").append('<tr><td><textarea class="form-control" cols="18" rows="2" name="video[' + i +
-                '][subjek]" placeholder="isikan embed kode disini." required></textarea></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></td></tr>'
+            $("#dynamicAddRemove").append('<tr><td><textarea class="form-control" cols="18" rows="2" name="videos[' + i +
+                '][subyek]" placeholder="isikan embed kode disini." required></textarea></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></td></tr>'
                 );
         });
         $(document).on('click', '.remove-input-field', function () {
             $(this).parents('tr').remove();
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+          var genericExamples = document.querySelectorAll('[data-trigger]');
+        for (i = 0; i < genericExamples.length; ++i) {
+          var element = genericExamples[i];
+          new Choices(element, {
+            placeholderValue: 'This is a placeholder set in the config',
+            searchPlaceholderValue: 'This is a search placeholder'
+          });
+        }
+
+        var textRemove = new Choices(document.getElementById('tag'), {
+          delimiter: ',',
+          editItems: true,
+          maxItemCount: 7,
+          removeItemButton: true
+        });
+        var textRemove = new Choices(document.getElementById('genre'), {
+          delimiter: ',',
+          editItems: true,
+          maxItemCount: 7,
+          removeItemButton: true
+        });
+
+        var textRemove = new Choices(document.getElementById('cast'), {
+          delimiter: ',',
+          editItems: true,
+          maxItemCount: 7,
+          removeItemButton: true
+        });
+
         });
     </script>
 

@@ -54,9 +54,9 @@
             </a>
             <ul class="pc-submenu">
               <li class="pc-item"><a class="pc-link" href="{{url('/dashboard/admin/all/post')}}">Semua Post</a></li>
-              <li class="pc-item"><a class="pc-link" href="#">New Movie Post</a></li>
-              <li class="pc-item"><a class="pc-link" href="#">New Blog Post</a></li>
-              <li class="pc-item"><a class="pc-link" href="#">Categori</a></li>
+              <li class="pc-item"><a class="pc-link" href="{{url('/dashboard/admin/movie_post/add')}}">New Movie Post</a></li>
+              <li class="pc-item"><a class="pc-link" href="{{url('/dashboard/admin/blog_post/add')}}">New Blog Post</a></li>
+              <li class="pc-item"><a class="pc-link" href="{{url('/dashboard/admin/categori/add')}}">Categori</a></li>
 
             </ul>
           </li>
