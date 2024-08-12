@@ -1,0 +1,74 @@
+
+.snackbar, .snackbar-top {
+  display: none;
+  padding: 15px 20px;
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  z-index: 1051;
+  background: #191E23;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.snackbar a, .snackbar-top a {
+  color: #fff;
+}
+
+.snackbar {
+  position: fixed;
+  bottom: 20px;
+  width: 500px;
+}
+
+.snackbar:hover {
+  opacity: 1;
+}
+
+.snackbar-top {
+  position: fixed;
+  top: 20px;
+  width: 300px;
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  .snackbar {
+    width: 90%;
+  }
+}
+
+.snackbar-primary {
+  background: #0096d6;
+  color: #fff;
+}
+
+.snackbar-success {
+  background: #4caf50;
+  color: #fff;
+}
+
+.snackbar-warning {
+  background: #ff9800;
+  color: #fff;
+}
+
+.snackbar-danger {
+  background: #e53935;
+  color: #fff;
+}
+
+.snackbar-info {
+  background: #1976d2;
+  color: #fff;
+}
+
+.snackbar-light {
+  background: #dddddd;
+  color: #fff;
+}
+
+.snackbar-dark {
+  background: #111111;
+  color: #fff;
+}

@@ -1,9 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\AdminCtrl;
 use App\Http\Controllers\LoginAdminCtrl;
 use App\Http\Controllers\LoginUserCtrl;
+use App\Http\Controllers\FrontCtrl;
+use App\Models\Users;
+use App\Models\Film;
+use App\Models\BlogPost;
+
 
 
 Route::get('/login/admin', [LoginAdminCtrl::class,'index']);
@@ -37,15 +43,44 @@ Route::middleware(['adminLogin'])->group(function () {
 
     Route::post('/dashboard/admin/ajax/hapus-eps', [AdminCtrl::class,'hapus_eps']);
     Route::post('/dashboard/admin/ajax/hapus-cover', [AdminCtrl::class,'hapus_cover']);
+    Route::post('/dashboard/admin/ajax/hapus-cover-post', [AdminCtrl::class,'hapus_cover_post']);
 
-    
+    // cek judul
+    Route::get('/movie/check-judul', function (\Illuminate\Http\Request $request) {
+        $judul = $request->query('judul');
+        $exists = Film::where('judul', $judul)->exists();
+        return response()->json(['exists' => $exists]);
+    });
+
+    Route::get('/blog/check-judul', function (\Illuminate\Http\Request $request) {
+        $judul = $request->query('judul');
+        $exists = BlogPost::where('judul', $judul)->exists();
+        return response()->json(['exists' => $exists]);
+    });
 
 });
 
 
 
+
+// front web`
+
+Route::get('/', [FrontCtrl::class,'index']);
+
 // login untuk user di depan
 Route::get('/login', [LoginUserCtrl::class,'index']);
+Route::post('/login/user/cek', [LoginUserCtrl::class,'cek_login']);
+// register
+Route::get('/register', [LoginUserCtrl::class,'register']);
+Route::post('/register/user/cek', [LoginUserCtrl::class,'register_act']);
+
+
+Route::get('/check-username', function (\Illuminate\Http\Request $request) {
+    $username = $request->query('username');
+    $exists = Users::where('username', $username)->exists();
+    return response()->json(['exists' => $exists]);
+});
+
 
 Route::middleware(['userLogin'])->group(function () {
     

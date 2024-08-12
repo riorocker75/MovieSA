@@ -31,7 +31,10 @@
   <!-- [Template CSS Files] -->
   <link rel="stylesheet" href="{{asset('/admin/assets/css/style.css')}}" id="main-style-link" >
   <link rel="stylesheet" href="{{asset('/admin/assets/css/style-preset.css')}}" >
-
+  <link rel="stylesheet" href="{{asset('/css/custom.css')}}">
+   
+  <script src="{{asset('/front/js/jquery-3.6.0.min.js')}}"></script>
+  <script src="{{asset('/js/custom.js')}}"></script>
 </head>
 
 <body data-pc-preset="preset-1" data-pc-sidebar-theme="dark" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">

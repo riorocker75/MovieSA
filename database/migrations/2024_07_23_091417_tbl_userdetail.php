@@ -16,9 +16,8 @@ return new class extends Migration
                 $table->bigIncrements('id');
                 $table->text('user_id')->nullable();
                 $table->text('nama')->nullable();
-               $table->text('gender')->nullable();
                $table->text('email')->nullable();
-               $table->text('umur')->nullable();
+               $table->date('umur')->nullable();
                $table->text('phone')->nullable();
                $table->text('point')->nullable();
             });

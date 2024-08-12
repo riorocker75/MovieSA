@@ -16,6 +16,7 @@ use App\Models\Category;
 use App\Models\Favorit;
 use App\Models\Film;
 use App\Models\FilmSub;
+
 use App\Models\Review;
 use App\Models\Tag;
 use App\Models\Users;
@@ -51,7 +52,7 @@ class AdminCtrl extends Controller
 
      function movie_post_act(Request $request){
         $request->validate([
-            'judul' => 'required',
+            'judul' => 'required|unique:film,judul',
             'desc' => 'required',
             'trailer' => 'required',
             'cover' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -258,22 +259,94 @@ class AdminCtrl extends Controller
     }
 
     function blog_post_act(Request $request){
-       
+        $request->validate([
+            'judul' => 'required|unique:post,judul',
+            'desc' => 'required',
+            'cover' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $slug = Str::slug($request->judul);
+
+        $coverName = time().'.'.$request->cover->extension();  
+        $request->cover->move(public_path('upload'), $coverName);
+
+        $date=date('Y-m-d');
+        DB::table('post')->insert([
+            'judul' => $request->judul,
+            'slug' => $slug,
+            'desc' => $request->desc,
+            'poster' => $coverName,
+            'cat_id' => $request->cat_id,
+            'tag' => $request->tag,
+            'tgl' => $date,
+            'status' => 1
+        ]);
+        return redirect('/dashboard/admin/all/post')->with('alert-success','Data Berhasil');  
+
     }
 
     function blog_post_edit($id){
-       
+        $data = BlogPost::where('id',$id)->get();
+
+        return view('admin.blog_edit',[
+            'data' =>$data,
+        ]);
     }
 
     function blog_post_update(Request $request){
+        $request->validate([
+            'judul' => 'required',
+            'desc' => 'required',
+            'cover' => '|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $slug = Str::slug($request->judul);
+
+       $id=$request->id;
+
+        if($request->cover == ""){
+            DB::table('post')->where('id',$id)->update([
+                'judul' => $request->judul,
+                'slug' => $slug,
+                'desc' => $request->desc,
+                'cat_id' => $request->cat_id,
+                'tag' => $request->tag,
+            ]);
+        }else{
+            $coverName = time().'.'.$request->cover->extension();  
+            $request->cover->move(public_path('upload'), $coverName);
+            DB::table('post')->where('id',$id)->update([
+                'judul' => $request->judul,
+                'slug' => $slug,
+                'desc' => $request->desc,
+                'poster' => $coverName,
+                'cat_id' => $request->cat_id,
+                'tag' => $request->tag,
+            ]);
+        }
        
+        return redirect('/dashboard/admin/all/post')->with('alert-success','Data Berhasil');  
+
     }
 
     function blog_post_delete($id){
-       
+        $post=BlogPost::where('id',$id)->first();
+        $destinationPath= public_path('upload');
+        File::delete($destinationPath.'/'.$post->cover);
+
+        BlogPost::where('id',$id)->delete();
+        return redirect('/dashboard/admin/all/post')->with('alert-success','Data Berhasil'); 
     }
 
+    function hapus_cover_post(Request $request){
+        $id= $request->cover;
+        $post=BlogPost::where('id',$id)->first();
+        $destinationPath= public_path('upload');
+        File::delete($destinationPath.'/'.$post->cover);
 
+        DB::table('post')->where('id',$id)->update([
+            'poster' => ""
+        ]);
+
+    }
 
 
     // users

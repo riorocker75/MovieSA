@@ -27,16 +27,20 @@
   <link rel="stylesheet" href="{{asset('/admin/assets/fonts/fontawesome.css')}}">
   <!-- [Material Icons] https://fonts.google.com/icons -->
   <link rel="stylesheet" href="{{asset('/admin/assets/fonts/material.css')}}">
+  <link rel="stylesheet" href="{{asset('/css/custom.css')}}">
+
   <!-- [Template CSS Files] -->
   <link rel="stylesheet" href="{{asset('/admin/assets/css/style.css')}}" id="main-style-link" >
   <link rel="stylesheet" href="{{asset('/admin/assets/css/style-preset.css')}}" >
   <script src="{{asset('/admin/assets/js/jquery.min.js')}}"></script>
   <script src="{{asset('/admin/assets/js/plugins/choices.min.js')}}"></script>
+  <script src="{{asset('/js/custom.js')}}"></script>
 
 </head>
 
 <body data-pc-preset="preset-1" data-pc-sidebar-theme="dark" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
-    <div class="loader-bg">
+    {{show_alert()}}
+  <div class="loader-bg">
         <div class="pc-loader">
           <div class="loader-fill"></div>
         </div>

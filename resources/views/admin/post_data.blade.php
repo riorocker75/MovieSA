@@ -53,8 +53,7 @@
                         <td>{{$dm->judul}}</td>
                         <td>{{format_tanggal($dm->tgl)}}</td>
                         <td>
-                            <a href="{{url('/dashboard/admin/movie_post/edit/'.$dm->id.'')}}" class="btn btn-warning"> <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            {{-- <a href="{{url('/dashboard/admin/movie/edit/'.$dt->id.'')}}" class="btn btn-default"> <i class="fa fa-eye" aria-hidden="true"></i></a> --}}
+                            <a href="{{url('/dashboard/admin/movie_post/edit/'.$dm->id.'')}}" class="btn btn-warning"> <i class="fas fa-pen-alt    "></i></a>
                             <a href="{{url('/dashboard/admin/movie_post/delete/'.$dm->id.'')}}" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                       
@@ -81,7 +80,7 @@
                   <table id="table2" class="table table-striped table-bordered nowrap">
                     <thead>
                       <tr>
-                       
+                        <th>No</th>
                         <th>Judul Post</th>
                         <th>Tanggal Post</th>
                         <th>Edit</th>
@@ -98,8 +97,8 @@
                         <td>{{$db->judul}}</td>
                         <td>{{format_tanggal($db->tgl)}}</td>
                         <td>
-
-
+                          <a href="{{url('/dashboard/admin/blog_post/edit/'.$db->id.'')}}" class="btn btn-warning"> <i class="fas fa-pen-alt    "></i></a>
+                          <a href="{{url('/dashboard/admin/blog_post/delete/'.$db->id.'')}}" class="btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                       
                       </tr>

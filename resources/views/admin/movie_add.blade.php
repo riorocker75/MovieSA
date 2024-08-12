@@ -34,8 +34,10 @@
                   <div class="card-body">
                     <div class="form-group">
                         <label class="form-label">Judul</label>
-                        <input type="text" class="form-control" placeholder="isikan judul movie.." name="judul" required>
+                        <span id="judul_check"></span>
+                        <input type="text" id="judulId" class="form-control" placeholder="isikan judul movie.." name="judul" required>
                       </div>
+
 
                       <div class="form-group">
                         <label class="form-label">Deskripsi</label>
@@ -90,7 +92,7 @@
 
                     <div class="form-group">
                         <label class="form-label">Upload Cover Film</label>
-                        <input type="file" class="form-control"  name="cover">
+                        <input type="file" class="form-control"  name="cover" required>
                       </div> 
                       
                       
@@ -188,6 +190,37 @@
 
         });
     </script>
+
+<script>
+  $(document).ready(function() {
+      $('#judulId').on('input', function() {
+          var judul = $(this).val();
+
+          if (judul.length > 0) {
+              $.ajax({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      },
+                  url: '/movie/check-judul',
+                  method: 'GET',
+                  data: { judul: judul },
+                  success: function(response) {
+                      if (response.exists) {
+                          $('#judul_check').text('Harap ganti judul ini !!').css('color', 'red');
+                      } else {
+                          $('#judul_check').text('Judul ini tersedia').css('color', 'green');
+                      }
+                  },
+                  error: function() {
+                      $('#judul_check').text('Error checking Judul').css('color', 'red');
+                  }
+              });
+          } else {
+              $('#judul_check').text('');
+          }
+      });
+  });
+</script>
 
 
 @endsection
