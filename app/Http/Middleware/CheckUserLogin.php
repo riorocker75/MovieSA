@@ -17,7 +17,7 @@ class CheckUserLogin
     public function handle(Request $request, Closure $next): Response
     {
         if (!Session::get('login-user')) {
-            return redirect('/login')->with('alert-danger', 'Silahkan Login');
+            return redirect('/login')->with('alert-danger', 'Silahkan Login untuk mengakses ');
         }
         return $next($request);
     }

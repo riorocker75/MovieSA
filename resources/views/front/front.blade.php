@@ -85,7 +85,7 @@
                                   </div>
                                   <div class="gen-movie-action">
                                      <div class="gen-btn-container">
-                                        <a href="{{url('/movie/play/'.$mvb->slug.'')}}" class="gen-button .gen-button-dark">
+                                        <a href="{{url('/user/movie/play/'.$mvb->slug.'')}}" class="gen-button .gen-button-dark">
                                            <i aria-hidden="true" class="fas fa-play"></i> <span class="text">Play
                                               Now</span>
                                         </a>

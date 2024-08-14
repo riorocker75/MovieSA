@@ -41,7 +41,7 @@ class LoginUserCtrl extends Controller
                 if(Hash::check($password,$data->password)){
                     Session::put('usr_username', $data->username);
                     Session::put('level', 2);
-                    Session::put('login-usr',TRUE);
+                    Session::put('login-user',TRUE);
                     return redirect('/dashboard/user')->with('alert-success','Selamat Datang Kembali');
                 }else{
                     return redirect('/login')->with('alert-danger','Password atau Email, Salah !');

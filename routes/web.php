@@ -83,6 +83,8 @@ Route::get('/check-username', function (\Illuminate\Http\Request $request) {
 
 
 Route::middleware(['userLogin'])->group(function () {
-    
+    // single play movie
+    Route::get('/user/movie/play/{slug}', [FrontCtrl::class,'play_movie']);
+     
 });
 

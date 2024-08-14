@@ -37,7 +37,16 @@ class FrontCtrl extends Controller
 
 
     function play_movie($slug){
-        
+        $data= Film::where('slug',$slug)->get();
+        $ds= Film::where('slug',$slug)->first();
+        $data_sub=FilmSub::where('film_id',$ds->id)->orderBy('eps','asc')->get();
+        $eps1=FilmSub::where('film_id',$ds->id)->where('eps',1)->first();
+
+        return view('front.user.single_play',[
+            'data' => $data,
+            'data_sub' =>$data_sub,
+            'eps1' => $eps1,
+        ]);
     }
 
 
