@@ -111,6 +111,19 @@
                       </div>
 
                       <div class="form-group ">
+                        <label class="form-label">Cast Pemain</label>
+                       
+                          <input
+                            class="form-control"
+                            id="cast"
+                            type="text"
+                            placeholder="Enter something"
+                            name="cast"
+                            required
+                         >
+                      </div>
+
+                      <div class="form-group ">
                         <label class="form-label">Genre</label>
                        
                           <input
@@ -119,6 +132,7 @@
                             type="text"
                             placeholder="Enter something"
                             name="genre"
+                            required
                          >
                       </div>
 
@@ -131,6 +145,7 @@
                             type="text"
                             placeholder="Enter something"
                             name="tag"
+                            required
                          >
                       </div>
 
@@ -188,6 +203,12 @@
           removeItemButton: true
         });
 
+        var textRemove = new Choices(document.getElementById('cast'), {
+          delimiter: ',',
+          editItems: true,
+          maxItemCount: 7,
+          removeItemButton: true
+        });
         });
     </script>
 

@@ -16,7 +16,7 @@
                              
                             </li>
                             <li class="menu-item">
-                               <a href="{{url('/movies/all')}}">Movies</a>
+                               <a href="{{url('/movies/all')}}">Movies </a>
                             </li>
                             <li class="menu-item">
                                <a href="{{url('/news/all')}}">News</a>
@@ -46,25 +46,30 @@
                          <a href="javascript:void(0)" id="gen-user-btn"><i class="fa fa-user"></i></a>
                          <div class="gen-account-menu">
                             <ul class="gen-account-menu">
+                              @if (!Session::get('login-user'))
+                                  
                                <!-- Pms Menu -->
                                <li>
-                                  <a href="log-in.html"><i class="fas fa-sign-in-alt"></i>
+                                  <a href="{{url('/login')}}"><i class="fas fa-sign-in-alt"></i>
                                      login </a>
                                </li>
                                <li>
-                                  <a href="register.html"><i class="fa fa-user"></i>
+                                  <a href="{{url('/register')}}"><i class="fa fa-user"></i>
                                      Register </a>
                                </li>
+                               @elseif(Session::get('login-user'))
                                <!-- Library Menu -->
                                <li>
-                                  <a href="library.html">
-                                     <i class="fa fa-indent"></i>
-                                     Library </a>
+                                  <a href="{{url('/logout')}}">
+                                   <i class="fas fa-lock-open    "></i>
+                                     Logout </a>
                                </li>
                                <li>
-                                  <a href="library.html"><i class="fa fa-list"></i>
+                                  <a href="{{url('/dashboard/user/playlist')}}"><i class="fa fa-list"></i>
                                      Movie Playlist </a>
                                </li>
+                              @endif
+
                             </ul>
                          </div>
                       </div>

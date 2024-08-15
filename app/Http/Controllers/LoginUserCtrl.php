@@ -33,6 +33,11 @@ class LoginUserCtrl extends Controller
         $username = $request->username;
         $password = $request->password;
         $data = Users::where('username',$username)->first();
+        // cek umur 
+        $user_detail = Userdetail::where('user_id',$data->id)->first();
+        $lahir = new \DateTime($user_detail->umur);
+        $sekarang = new \DateTime();
+        $umur = $lahir->diff($sekarang);
 
         if($data){
            if($data->level == "2"){
@@ -41,6 +46,7 @@ class LoginUserCtrl extends Controller
                 if(Hash::check($password,$data->password)){
                     Session::put('usr_username', $data->username);
                     Session::put('level', 2);
+                    Session::put('umur', $umur->y);
                     Session::put('login-user',TRUE);
                     return redirect('/dashboard/user')->with('alert-success','Selamat Datang Kembali');
                 }else{
@@ -80,7 +86,7 @@ class LoginUserCtrl extends Controller
         ]);
 
         $lastId=  DB::table('user')->insertGetId([
-            'username' => $request->nama,
+            'username' => $request->username,
             'password'=> bcrypt($request->password),
             'level'=> 2,
             'status' => 1

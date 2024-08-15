@@ -39,7 +39,9 @@ Route::middleware(['adminLogin'])->group(function () {
     Route::post('/dashboard/admin/blog_post/update', [AdminCtrl::class,'blog_post_update']);
     Route::get('/dashboard/admin/blog_post/delete/{id}', [AdminCtrl::class,'blog_post_delete']);
 
-    // user`
+    // user
+    Route::get('/dashboard/admin/user/data', [AdminCtrl::class,'user_data']);
+
 
     Route::post('/dashboard/admin/ajax/hapus-eps', [AdminCtrl::class,'hapus_eps']);
     Route::post('/dashboard/admin/ajax/hapus-cover', [AdminCtrl::class,'hapus_cover']);
@@ -70,6 +72,8 @@ Route::get('/', [FrontCtrl::class,'index']);
 // login untuk user di depan
 Route::get('/login', [LoginUserCtrl::class,'index']);
 Route::post('/login/user/cek', [LoginUserCtrl::class,'cek_login']);
+Route::get('/logout', [LoginUserCtrl::class,'logout']);
+
 // register
 Route::get('/register', [LoginUserCtrl::class,'register']);
 Route::post('/register/user/cek', [LoginUserCtrl::class,'register_act']);

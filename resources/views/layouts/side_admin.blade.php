@@ -67,7 +67,7 @@
           </li> --}}
         
           <li class="pc-item">
-            <a href="#" class="pc-link">
+            <a href="{{url('/dashboard/admin/user/data')}}" class="pc-link">
               <span class="pc-micon">
                 <i class="ph-duotone ph-users-three"></i>
               </span>

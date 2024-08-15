@@ -71,6 +71,7 @@ class AdminCtrl extends Controller
             'trailer'=> $request->trailer,
             'desc' => $request->desc,
             'tag' => $request->tag,
+            'cast' => $request->cast,
             'genre' => $request->genre,
             'umur' => $request->umur,
             'cat_id' => $request->cat_id,
@@ -352,7 +353,10 @@ class AdminCtrl extends Controller
     // users
 
     function user_data(){
-
+        $data=Users::where('level',2)->orderBy('id','desc')->get();
+        return view('admin.user_data',[
+            'data' => $data
+        ]);
     }
 
     function user_add(){
@@ -372,7 +376,9 @@ class AdminCtrl extends Controller
     }
 
     function user_delete($id){
-       
+        Userdetail::where('user_id',$id)->delete();
+        Users::where('id',$id)->delete();
+        return redirect('/dashboard/admin/user/data')->with('alert-success','Data Berhasil'); 
     }
 
     // review
