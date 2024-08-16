@@ -20,7 +20,7 @@ class UserDetail_seed extends Seeder
           'nama' =>"Safira",
           'gender' =>"Wanita",
           'email'=> "Safira@tes.com",
-          'umur'=> 20,
+          'umur'=> "1995-10-12",
           'phone'=> "082366779",
           'point'=> 10,
         ]);
@@ -31,7 +31,7 @@ class UserDetail_seed extends Seeder
             'nama' =>"Razman",
             'gender' =>"Pria",
             'email'=> "Razman@tes.com",
-            'umur'=> 40,
+            'umur'=> "2013-10-12",
             'phone'=> "082126779",
             'point'=> 10,
           ]);

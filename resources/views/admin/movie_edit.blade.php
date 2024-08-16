@@ -178,7 +178,7 @@
                         <label class="form-label" for="exampleFormControlSelect1">Kategori Movie</label>
                         <select class="form-select" name="cat_id" id="exampleFormControlSelect1" required>
                             @php
-                                 $cat= App\Models\Category::orderBy('id','desc')->get();
+                                 $cat= App\Models\Category::where('status',1)->orderBy('id','desc')->get();
                                  $cat_id=App\Models\Category::where('id',$dt->cat_id)->first();
                             @endphp
                             <option value="{{$dt->cat_id}}" selected>{{$cat_id->nama}}</option>

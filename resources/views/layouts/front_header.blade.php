@@ -6,7 +6,7 @@
              <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
                    <a class="navbar-brand" href="#">
-                      <img class="img-fluid logo" src="images/logo-1.png" alt="streamlab-image">
+                      {{-- <img class="img-fluid logo" src="" alt="streamlab-image"> --}}
                    </a>
                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <div id="gen-menu-contain" class="gen-menu-contain">
@@ -32,10 +32,12 @@
                       <div class="gen-menu-search-block">
                          <a href="javascript:void(0)" id="gen-seacrh-btn"><i class="fa fa-search"></i></a>
                          <div class="gen-search-form">
-                            <form role="search" method="get" class="search-form" action="#">
-                               <label>
+                            <form role="" method="get" class="search-form" action="{{url('/movie/search')}}">
+                              @csrf
+                              @method('GET')  
+                              <label>
                                   <span class="screen-reader-text"></span>
-                                  <input type="search" class="search-field" placeholder="Search …" value="" name="s">
+                                  <input type="search" class="search-field" placeholder="Search …"  name="cari">
                                </label>
                                <button type="submit" class="search-submit"><span
                                      class="screen-reader-text"></span></button>

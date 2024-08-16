@@ -383,7 +383,85 @@ class AdminCtrl extends Controller
 
     // review
 
+    // categories
+    function cat_data(){
+        $data_movie= Category::where('status',1)->get();
+        $data_blog= Category::where('status',2)->get();
 
+        return view('admin.cat_data',[
+            'data_movie' =>$data_movie,
+            'data_blog' =>$data_blog,
+        ]);
+    }
+    
+    function cat_movie_act(Request $request){
+        $request->validate([
+            'nama' => 'required',
+        ]); 
+        $slug=Str::slug($request->nama);
+        DB::table('category')->insert([
+            'nama' =>$request->nama,
+            'slug' =>$slug,
+            'status' => 1
+        ]);  
+        return redirect('/dashboard/admin/categori/all')->with('alert-success','Data Berhasil'); 
+
+    }
+
+    function cat_movie_update($id){
+        $request->validate([
+            'nama' => 'required',
+        ]); 
+        $slug=Str::slug($request->nama);
+        $id = $request->id;
+        DB::table('category')->where('id',$id)->update([
+            'nama' =>$request->nama,
+            'slug' =>$slug,
+        ]);  
+        return redirect('/dashboard/admin/categori/all')->with('alert-success','Data Berhasil'); 
+
+    }
+
+    function cat_movie_delete($id){
+       Category::where('id',$id)->delete();
+       return redirect('/dashboard/admin/categori/all')->with('alert-success','Data Berhasil'); 
+
+    }
+
+    // cat blog
+    function cat_blog_act(Request $request){
+        $request->validate([
+            'nama' => 'required',
+        ]); 
+        $slug=Str::slug($request->nama);
+        DB::table('category')->insert([
+            'nama' =>$request->nama,
+            'slug' =>$slug,
+            'status' => 2
+        ]);  
+        return redirect('/dashboard/admin/categori/all')->with('alert-success','Data Berhasil'); 
+
+    }
+
+    function cat_blog_update($id){
+        $request->validate([
+            'nama' => 'required',
+        ]); 
+        $slug=Str::slug($request->nama);
+        $id = $request->id;
+        DB::table('category')->where('id',$id)->update([
+            'nama' =>$request->nama,
+            'slug' =>$slug,
+        ]);  
+        return redirect('/dashboard/admin/categori/all')->with('alert-success','Data Berhasil'); 
+
+    }
+
+    function cat_blog_delete($id){
+        Category::where('id',$id)->delete();
+        return redirect('/dashboard/admin/categori/all')->with('alert-success','Data Berhasil'); 
+
+    }
  
 
 

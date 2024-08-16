@@ -37,9 +37,12 @@ class FrontCtrl extends Controller
             }
 
         $data_film = Film::orderBy('id','desc')->get();
+        $data_po = Film::where('cat_id','3')->orderBy('id','desc')->get();
+
         return view('front.front',[
             'data_film' => $data_film,
-            'data_recom' =>$data_recom
+            'data_recom' =>$data_recom,
+            'data_po' => $data_po,
         ]);
 
     }
@@ -81,5 +84,54 @@ class FrontCtrl extends Controller
             }
     }
 
+    //movies
+    
+    function movie_data(){
+        $data = Film::orderBy('id','desc')->paginate(8);
+        return view('front.movie',[
+            'data' => $data
+        ]);
+    }
+
+    // blog
+    function blog_data(){
+        $data = BlogPost::orderBy('id','desc')->paginate(8);
+        return view('front.blog',[
+            'data' => $data
+        ]);
+    }
+
+    function blog_detail($slug){
+        $data= BlogPost::where('slug',$slug)->get();
+        return view('front.single_blog',[
+            'data' =>$data
+        ]);
+    }
+
+    // pencarian
+    function cari_movie(Request $request){
+        $cari= $request->cari;
+        $data= Film::where('judul', 'LIKE', "%{$cari}%")
+        ->orWhere('desc', 'LIKE', "%{$cari}%")
+        ->orWhere('genre', 'LIKE', "%{$cari}%")
+        ->paginate(8);
+
+        return view('front.search_movie',[
+            'data' => $data,
+            'cari' => $cari
+        ]);
+    }
+
+    function cari_blog(Request $request){
+        $cari= $request->cari;
+        $data= BlogPost::where('judul', 'LIKE', "%{$cari}%")
+        ->orWhere('desc', 'LIKE', "%{$cari}%")
+        ->paginate(8);
+
+        return view('front.search_blog',[
+            'data' => $data,
+            'cari' => $cari
+        ]);
+    }
 
 }

@@ -65,11 +65,11 @@
                       
                       
                       <div class="form-group">
-                        <label class="form-label" for="exampleFormControlSelect1">Kategori Movie</label>
+                        <label class="form-label" for="exampleFormControlSelect1">Kategori Post</label>
                         <select class="form-select" name="cat_id" id="exampleFormControlSelect1" required>
                             <option >Pilih kategori</option>
                             @php
-                                $cat= App\Models\Category::orderBy('id','desc')->get();
+                                $cat= App\Models\Category::where('status',2)->orderBy('id','desc')->get();
                             @endphp
                             @foreach ($cat as $ct)
                                <option value="{{$ct->id}}">{{$ct->nama}}</option>

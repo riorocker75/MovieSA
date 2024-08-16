@@ -41,14 +41,16 @@ class LoginUserCtrl extends Controller
 
         if($data){
            if($data->level == "2"){
-            Session::flush();
+            // Session::flush();
                 
                 if(Hash::check($password,$data->password)){
                     Session::put('usr_username', $data->username);
                     Session::put('level', 2);
                     Session::put('umur', $umur->y);
                     Session::put('login-user',TRUE);
-                    return redirect('/dashboard/user')->with('alert-success','Selamat Datang Kembali');
+
+                    $intendedUrl = Session::pull('url.intended', '/');
+                    return redirect($intendedUrl)->with('alert-success','Selamat Datang Kembali');
                 }else{
                     return redirect('/login')->with('alert-danger','Password atau Email, Salah !');
                 }
@@ -67,7 +69,7 @@ class LoginUserCtrl extends Controller
 
     function logout(){
          Session::flush();
-        return redirect('/login')->with('alert-success','Logout berhasil');
+        return redirect('/')->with('alert-success','Logout berhasil');
     }
 
     

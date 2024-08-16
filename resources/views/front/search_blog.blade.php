@@ -9,14 +9,17 @@
                 <nav aria-label="breadcrumb">
                     <div class="gen-breadcrumb-title">
                         <h1>
-                            All Post
+                            Search : {{$cari}}
                         </h1>
+                        @if($data->isEmpty())
+                        <h5><p>Oopss, Tidak ditemukan '{{ request('cari') }}'</p></h5> 
+                         @endif
                     </div>
                     <div class="gen-breadcrumb-container">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{url('/')}}"><i
                                         class="fas fa-home mr-2"></i>Home</a></li>
-                            <li class="breadcrumb-item active">All Post</li>
+                            <li class="breadcrumb-item active">{{$cari}}</li>
                         </ol>
                     </div>
                 </nav>
@@ -71,7 +74,7 @@
                         @endforeach
                         
                     </div>
-                    {{$data->links('pag')}}
+                    {{$data->appends(['cari' => request('cari')])->links('pag')}}
                     
                 </div>
             </div>

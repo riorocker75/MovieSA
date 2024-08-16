@@ -21,5 +21,27 @@ class Cat_seed extends Seeder
           'desc' =>"",
           'status'=> 1
         ]);
+        Category::create([
+          'id' => 2,
+          'nama' => "Uncategorized",
+          'slug' => "uncategorized-post",
+          'desc' =>"",
+          'status'=> 2
+        ]);
+        Category::create([
+          'id' => 3,
+          'nama' => "Populer",
+          'slug' => "populer",
+          'desc' =>"",
+          'status'=> 1
+        ]);
+        Category::create([
+          'id' => 4,
+          'nama' => "Pilihan Oscar",
+          'slug' => "pilihan-oscar",
+          'desc' =>"",
+          'status'=> 1
+        ]);
+      
     }
 }

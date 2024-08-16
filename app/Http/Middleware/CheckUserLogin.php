@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Session;
@@ -17,6 +18,7 @@ class CheckUserLogin
     public function handle(Request $request, Closure $next): Response
     {
         if (!Session::get('login-user')) {
+            Session::put('url.intended', $request->fullUrl());
             return redirect('/login')->with('alert-danger', 'Silahkan Login untuk mengakses ');
         }
         return $next($request);

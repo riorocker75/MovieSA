@@ -39,6 +39,20 @@ Route::middleware(['adminLogin'])->group(function () {
     Route::post('/dashboard/admin/blog_post/update', [AdminCtrl::class,'blog_post_update']);
     Route::get('/dashboard/admin/blog_post/delete/{id}', [AdminCtrl::class,'blog_post_delete']);
 
+    // all cat
+    Route::get('/dashboard/admin/categori/all', [AdminCtrl::class,'cat_data']);
+
+    // cat movie
+    Route::post('/dashboard/admin/cat_movie/act', [AdminCtrl::class,'cat_movie_act']);
+    Route::post('/dashboard/admin/cat_movie/update', [AdminCtrl::class,'cat_movie_update']);
+    Route::get('/dashboard/admin/cat_movie/delete/{id}', [AdminCtrl::class,'cat_movie_delete']);
+
+    // cat blog
+    Route::post('/dashboard/admin/cat_blog/act', [AdminCtrl::class,'cat_blog_act']);
+    Route::post('/dashboard/admin/cat_blog/update', [AdminCtrl::class,'cat_blog_update']);
+    Route::get('/dashboard/admin/cat_blog/delete/{id}', [AdminCtrl::class,'cat_blog_delete']);
+
+
     // user
     Route::get('/dashboard/admin/user/data', [AdminCtrl::class,'user_data']);
 
@@ -77,6 +91,17 @@ Route::get('/logout', [LoginUserCtrl::class,'logout']);
 // register
 Route::get('/register', [LoginUserCtrl::class,'register']);
 Route::post('/register/user/cek', [LoginUserCtrl::class,'register_act']);
+
+//movie all
+Route::get('/movies/all', [FrontCtrl::class,'movie_data']);
+
+// blog all
+Route::get('/news/all', [FrontCtrl::class,'blog_data']);
+Route::get('/news/single/{slug}', [FrontCtrl::class,'blog_detail']);
+
+// cari
+Route::get('/movie/search', [FrontCtrl::class,'cari_movie']);
+Route::get('/blog/search', [FrontCtrl::class,'cari_blog']);
 
 
 Route::get('/check-username', function (\Illuminate\Http\Request $request) {
