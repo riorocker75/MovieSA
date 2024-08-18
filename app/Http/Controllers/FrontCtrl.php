@@ -134,4 +134,73 @@ class FrontCtrl extends Controller
         ]);
     }
 
+
+    // favorite add
+    function favorite_act(Request $request){
+
+        $movieId = $request->movie_id;
+        $userId = Session::get('user_id');
+
+    $favorite = DB::table('favorit')
+        ->where('film_id', $movieId)
+        ->where('user_id', $userId)
+        ->first();
+   
+        if ($favorite) {
+            DB::table('favorit')
+                ->where('film_id', $movieId)
+                ->where('user_id', $userId)
+                ->delete();
+
+            return response()->json(['status' => 'removed']);
+        } else {
+            DB::table('favorit')->insert([
+                'film_id' => $movieId,
+                'user_id' => $userId,
+            ]);
+
+            return response()->json(['status' => 'added']);
+        }     
+    }
+
+    function user_dashboard(){
+        return view('front.user.dashboard');
+    }
+
+    function user_fav($id){
+        $data= Favorit::where('user_id',$id)->orderBy('id','desc')->paginate(8);
+        return view('front.user.favorit',[
+            'data' => $data
+        ]);
+    }
+
+    function user_setting_act(Request $request){
+        $request->validate([
+            'nama' => 'required',
+        ]);  
+        $id=$request->id;
+
+        if($request->password == ""){
+          
+            DB::table('user_detail')->where('user_id',$id)->update([
+                'nama' => $request->nama,
+                'email' => $request->email,
+            ]);
+
+        }else{
+
+            DB::table('user')->where('id',$id)->update([
+                'password' => bcrypt($request->password),
+            ]);
+
+            DB::table('user_detail')->where('user_id',$id)->update([
+                'nama' => $request->nama,
+                'email' => $request->email,
+            ]);
+        }
+        return redirect('/dashboard/user')->with('alert-success','Data telah di ubah'); 
+        
+
+    }   
+
 }

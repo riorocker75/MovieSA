@@ -22,9 +22,9 @@
                                <a href="{{url('/news/all')}}">News</a>
                             </li>
                             
-                            <li class="menu-item">
+                            {{-- <li class="menu-item">
                                <a href="{{url('/about')}}">About Us</a>
-                            </li>
+                            </li> --}}
                          </ul>
                       </div>
                    </div>
@@ -62,14 +62,18 @@
                                @elseif(Session::get('login-user'))
                                <!-- Library Menu -->
                                <li>
-                                  <a href="{{url('/logout')}}">
-                                   <i class="fas fa-lock-open    "></i>
-                                     Logout </a>
+                                 <a href="{{url('/dashboard/user/')}}"><i class="fa fa-home"></i>
+                                   Dashboard</a>
+                              </li>
+                               <li>
+                                  <a href="{{url('/dashboard/user/favorit/'.Session::get('user_id').'')}}"><i class="fa fa-list"></i>
+                                    Favorit Movie </a>
                                </li>
                                <li>
-                                  <a href="{{url('/dashboard/user/playlist')}}"><i class="fa fa-list"></i>
-                                     Movie Playlist </a>
-                               </li>
+                                 <a href="{{url('/logout')}}">
+                                  <i class="fas fa-lock-open    "></i>
+                                    Logout </a>
+                              </li>
                               @endif
 
                             </ul>

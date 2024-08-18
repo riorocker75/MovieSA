@@ -147,8 +147,11 @@
                                  <img src="{{asset('/upload/'.$dr->poster.'')}}" alt="owl-carousel-video-image">
                                  <div class="gen-movie-add">
                                     <div class="wpulike wpulike-heart">
-                                       <div class="wp_ulike_general_class wp_ulike_is_not_liked"><button
-                                             type="button" class="wp_ulike_btn wp_ulike_put_image"></button></div>
+                                       <div class="wp_ulike_general_class wp_ulike_is_not_liked">
+                                          <button class="favButton favorite-toggle" data-movie-id="{{ $dr->id }}">
+                                             <i class="fa fa-heart {{ $dr->is_favorited ? 'fRed' : '' }}"></i>
+                                          </button>
+                                       </div>
                                     </div>
                                     <ul class="menu bottomRight">
                                        <li class="share top">
@@ -162,19 +165,7 @@
                                           </ul>
                                        </li>
                                     </ul>
-                                    <div class="movie-actions--link_add-to-playlist dropdown">
-                                       <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i
-                                             class="fa fa-plus"></i></a>
-                                       <div class="dropdown-menu mCustomScrollbar">
-                                          <div class="mCustomScrollBox">
-                                             <div class="mCSB_container">
-                                                <a class="login-link" href="register.html">Sign in to add this movie
-                                                   to a
-                                                   playlist.</a>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
+                                 
                                  </div>
                                  <div class="gen-movie-action">
                                     <a href="{{url('/user/movie/play/'.$dr->slug.'')}}" class="gen-button">
@@ -250,8 +241,12 @@
                                  <img src="{{asset('/upload/'.$dp->poster.'')}}" alt="owl-carousel-video-image">
                                  <div class="gen-movie-add">
                                     <div class="wpulike wpulike-heart">
-                                       <div class="wp_ulike_general_class wp_ulike_is_not_liked"><button
-                                             type="button" class="wp_ulike_btn wp_ulike_put_image"></button></div>
+                                       <div class="wp_ulike_general_class wp_ulike_is_not_liked ">
+                                          <button class="favButton favorite-toggle" data-movie-id="{{ $dp->id }}">
+                                             <i class="fa fa-heart {{ $dp->is_favorited ? 'fRed' : '' }}"></i>
+                                          </button>
+                                          
+                                          </div>
                                     </div>
                                     <ul class="menu bottomRight">
                                        <li class="share top">
@@ -265,19 +260,7 @@
                                           </ul>
                                        </li>
                                     </ul>
-                                    <div class="movie-actions--link_add-to-playlist dropdown">
-                                       <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i
-                                             class="fa fa-plus"></i></a>
-                                       <div class="dropdown-menu mCustomScrollbar">
-                                          <div class="mCustomScrollBox">
-                                             <div class="mCSB_container">
-                                                <a class="login-link" href="register.html">Sign in to add this movie
-                                                   to a
-                                                   playlist.</a>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
+                                   
                                  </div>
                                  <div class="gen-movie-action">
                                     <a href="{{url('/user/movie/play/'.$dp->slug.'')}}" class="gen-button">

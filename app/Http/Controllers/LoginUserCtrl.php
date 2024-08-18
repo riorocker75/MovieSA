@@ -45,6 +45,7 @@ class LoginUserCtrl extends Controller
                 
                 if(Hash::check($password,$data->password)){
                     Session::put('usr_username', $data->username);
+                    Session::put('user_id', $data->id);
                     Session::put('level', 2);
                     Session::put('umur', $umur->y);
                     Session::put('login-user',TRUE);

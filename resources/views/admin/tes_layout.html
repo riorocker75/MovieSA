@@ -27,3 +27,9 @@
 
 
 @endsection
+
+
+
+<button class="favButton favorite-toggle" data-movie-id="{{ $dr->id }}">
+  <i class="fa fa-heart {{ $dr->is_favorited ? 'fRed' : '' }}"></i>
+</button>

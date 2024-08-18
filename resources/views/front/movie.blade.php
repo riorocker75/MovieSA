@@ -13,7 +13,7 @@
                     </div>
                     <div class="gen-breadcrumb-container">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i
+                            <li class="breadcrumb-item"><a href="{{url('/')}}"><i
                                         class="fas fa-home mr-2"></i>Home</a></li>
                             <li class="breadcrumb-item active">Movie</li>
                         </ol>
@@ -40,8 +40,11 @@
                                     <img src="{{asset('/upload/'.$dt->poster.'')}}" alt="streamlab-image">
                                     <div class="gen-movie-add">
                                         <div class="wpulike wpulike-heart">
-                                            <div class="wp_ulike_general_class wp_ulike_is_not_liked"><button
-                                                    type="button" class="wp_ulike_btn wp_ulike_put_image"></button>
+                                            <div class="wp_ulike_general_class wp_ulike_is_not_liked">
+                                                @csrf
+                                                <button class="favButton favorite-toggle" data-movie-id="{{ $dt->id }}">
+                                                    <i class="fa fa-heart {{ $dt->is_favorited ? 'fRed' : '' }}"></i>
+                                                 </button>
                                             </div>
                                         </div>
                                         <ul class="menu bottomRight">
@@ -59,19 +62,7 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                        <div class="movie-actions--link_add-to-playlist dropdown">
-                                            <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i
-                                                    class="fa fa-plus"></i></a>
-                                            <div class="dropdown-menu mCustomScrollbar">
-                                                <div class="mCustomScrollBox">
-                                                    <div class="mCSB_container">
-                                                        <a class="login-link" href="#">Sign in to add this movie to
-                                                            a
-                                                            playlist.</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    
                                     </div>
                                     <div class="gen-movie-action">
                                         <a href="{{url('/user/movie/play/'.$dt->slug.'')}}" class="gen-button">

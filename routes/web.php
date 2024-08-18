@@ -114,6 +114,11 @@ Route::get('/check-username', function (\Illuminate\Http\Request $request) {
 Route::middleware(['userLogin'])->group(function () {
     // single play movie
     Route::get('/user/movie/play/{slug}', [FrontCtrl::class,'play_movie']);
-     
+    Route::post('/favorite/toggle', [FrontCtrl::class,'favorite_act']);
+    Route::get('/dashboard/user/', [FrontCtrl::class,'user_dashboard']);
+    Route::get('/dashboard/user/favorit/{id}', [FrontCtrl::class,'user_fav']);
+    Route::get('/dashboard/user/pengaturan/{id}', [FrontCtrl::class,'user_setting']);
+    Route::post('/dashboard/user/pengaturan/act', [FrontCtrl::class,'user_setting_act']);
+    
 });
 

@@ -27,7 +27,7 @@
 </head>
 
 <body>
-
+   <input type="hidden" id="cookie_log" name="cookie_log" value="{{Session::get('login-user')}}">
    {{show_alert()}}
 
     @include('layouts/front_header')
@@ -84,7 +84,38 @@
  <script src="{{asset('/front/js/streamlab-core.js')}}"></script>
 
  <script src="{{asset('/front/js/script.js')}}"></script>
+<script>
+ $(document).ready(function() {
+        $('.favorite-toggle').click(function() {
+            var button = $(this);
+            var movieId = button.data('movie-id');
+            var log_user= $('#cookie_log').val();
+            if(log_user === ""){
+               alert('You must log in to add this movie to your favorites.');
+                    // Optionally, redirect to the login page:
+                    window.location.href = '{{ url("/login") }}';
+            }else{
+            $.ajax({
+                url: '{{ url("favorite/toggle") }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    movie_id: movieId
+                },
+                success: function(response) {
+                  if(response.status === 'added') {
+                        button.find('i').addClass('fRed');
+                    } else if(response.status === 'removed'){
+                        button.find('i').removeClass('fRed');
+                    }
+                }
+            });
+         }
+        });
+    });
 
+
+</script>
 
 </body>
 
