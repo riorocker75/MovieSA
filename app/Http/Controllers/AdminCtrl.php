@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\Favorit;
+use App\Models\Rating;
+
 use App\Models\Film;
 use App\Models\FilmSub;
 

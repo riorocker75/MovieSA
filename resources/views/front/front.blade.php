@@ -144,6 +144,18 @@
                         <div class="gen-carousel-movies-style-2 movie-grid style-2">
                            <div class="gen-movie-contain">
                               <div class="gen-movie-img">
+                                 <div class="front-rating">
+                                    <i class="fa fa-star" aria-hidden="true" style="color:#fbc02d"> 
+                                       
+                                       @php
+                                       $movier = \App\Models\Film::findOrFail($dr->id);
+                                       $averageRatingr = $movier->averageRating();
+                                       @endphp
+                                     <span style="color: #fff;">
+                                           {{$averageRatingr ?? '' }}
+                                       </span>
+                                    </i>
+                                 </div>
                                  <img src="{{asset('/upload/'.$dr->poster.'')}}" alt="owl-carousel-video-image">
                                  <div class="gen-movie-add">
                                     <div class="wpulike wpulike-heart">
@@ -238,6 +250,18 @@
                         <div class="gen-carousel-movies-style-2 movie-grid style-2">
                            <div class="gen-movie-contain">
                               <div class="gen-movie-img">
+                                 <div class="front-rating">
+                                    <i class="fa fa-star" aria-hidden="true" style="color:#fbc02d"> 
+                                       
+                                       @php
+                                       $movie = \App\Models\Film::findOrFail($dp->id);
+                                       $averageRating = $movie->averageRating();
+                                       @endphp
+                                     <span style="color: #fff;">
+                                           {{$averageRating ?? '' }}
+                                       </span>
+                                    </i>
+                                 </div>
                                  <img src="{{asset('/upload/'.$dp->poster.'')}}" alt="owl-carousel-video-image">
                                  <div class="gen-movie-add">
                                     <div class="wpulike wpulike-heart">

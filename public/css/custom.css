@@ -88,3 +88,50 @@
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
 }
+
+.front-rating{
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  display: flex;
+  z-index: 99;
+  padding: 10px 8px;
+  background: #111111;
+  border-radius: 4px;
+}
+
+/* untuk rating  */
+
+.stars a {
+  display: inline-block;
+  padding-right: 4px;
+  text-decoration: none;
+  margin: 0;
+}
+
+.stars a:after {
+  position: relative;
+  font-size: 18px;
+  font-family: "Font Awesome 5 Free";
+  display: block;
+  content: "\f005";
+  color: #9e9e9e;
+}
+
+
+.stars a:hover~a:after {
+  color: #9e9e9e !important;
+}
+
+ a.active~a:after {
+  color: #9e9e9e;
+}
+
+span:hover a:after {
+  color: #fbc02d !important;
+}
+
+a:after,
+.stars a.active:after {
+  color: #fbc02d;
+}

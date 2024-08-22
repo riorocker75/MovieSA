@@ -25,4 +25,14 @@ class Film extends Model
         return $this->hasMany(Favorit::class, 'film_id');
     }
 
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->ratings()->avg('rating');
+    }
+
 }

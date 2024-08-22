@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\BlogPost;
 use App\Models\Category;
+use App\Models\Rating;
 use App\Models\Favorit;
 use App\Models\Film;
 use App\Models\FilmSub;
@@ -73,11 +74,12 @@ class FrontCtrl extends Controller
                 $ds= Film::where('slug',$slug)->first();
                 $data_sub=FilmSub::where('film_id',$ds->id)->orderBy('eps','asc')->get();
                 $eps1=FilmSub::where('film_id',$ds->id)->where('eps',1)->first();
-
+                $movie_id= $ds->id;
                 return view('front.user.single_play',[
                     'data' => $data,
                     'data_sub' =>$data_sub,
                     'eps1' => $eps1,
+                    'movie_id' =>$movie_id,
                 ]);
             } else {
                 return redirect()->back()->with('alert-danger', $error_message ?? 'Film tidak ditemukan.');
@@ -162,6 +164,59 @@ class FrontCtrl extends Controller
             return response()->json(['status' => 'added']);
         }     
     }
+
+    // rating
+    function rating_act(Request $request){
+        // $request->validate([
+        //     'movie_id' => 'required',
+        //     'rating' => 'required|min:1|max:5',
+        // ]);
+        \Log::info('Request Data:', $request->all());
+        $movieId = $request->movie_id;
+        $userId = Session::get('user_id');
+        // Rating::insert(
+        //     ['user_id' => $userId,
+        //      'film_id' => $movieId,
+        //      'rating' => $request->rating,
+        //      'tgl' => date('Y-m-d')
+        //     ],
+        // );
+
+        $rating = Rating::where('user_id',  $userId)
+                    ->where('film_id', $movieId)
+                    ->first();
+
+            if ($rating) {
+                // Update the existing rating
+                $rating = DB::table('rating')
+                ->where('user_id',$userId)
+                ->where('film_id',$movieId)
+                ->update([
+                    'rating' => $request->rating
+                ]);
+            } else {
+                // Create a new rating
+                $rating = Rating::insert([
+                    'user_id' => $userId,
+                    'film_id' => $movieId,
+                    'rating' => $request->rating,
+                    'tgl' => date('Y-m-d')
+                ]);
+            }
+
+        return response()->json(['success' => true, 'rating' => $request->rating]);
+    }
+
+    function rating_get($movieId){
+        $rating = Rating::where('user_id', Session::get('user_id'))
+        ->where('film_id', $movieId)
+        ->pluck('rating')
+        ->first();
+
+        return response()->json(['rating' => $rating]);
+    }
+
+    // user
 
     function user_dashboard(){
         return view('front.user.dashboard');

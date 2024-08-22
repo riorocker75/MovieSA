@@ -120,5 +120,9 @@ Route::middleware(['userLogin'])->group(function () {
     Route::get('/dashboard/user/pengaturan/{id}', [FrontCtrl::class,'user_setting']);
     Route::post('/dashboard/user/pengaturan/act', [FrontCtrl::class,'user_setting_act']);
     
+    // rating
+    Route::post('/rating/toggle', [FrontCtrl::class,'rating_act']);
+    Route::get('/rating/get/{movieId}', [FrontCtrl::class,'rating_get']);
+
 });
 

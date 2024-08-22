@@ -41,6 +41,18 @@
                         <div class="gen-carousel-movies-style-3 movie-grid style-3">
                             <div class="gen-movie-contain">
                                 <div class="gen-movie-img">
+                                    <div class="front-rating">
+                                        <i class="fa fa-star" aria-hidden="true" style="color:#fbc02d"> 
+                                           
+                                           @php
+                                           $movie = \App\Models\Film::findOrFail($dt->id);
+                                           $averageRating = $movie->averageRating();
+                                           @endphp
+                                         <span style="color: #fff;">
+                                               {{$averageRating ?? '' }}
+                                           </span>
+                                        </i>
+                                     </div>
                                     <img src="{{asset('/upload/'.$dt->poster.'')}}" alt="streamlab-image">
                                     <div class="gen-movie-add">
                                         <div class="wpulike wpulike-heart">

@@ -53,6 +53,21 @@
                                         </ul> --}}
                                     </div>
                                     <p>{!! $dt->desc !!}</p>
+                                    <div class="give-rating">
+                                        <h4 class="align-self-center">Rating Kamu:</h4>
+                                        <input type="hidden" id="movie_id" value="{{$dt->id}}">
+                                        <p class="stars" >
+                                            {{-- <label class="myrating">0</label> --}}
+                                            <span>
+                                              <a class="star-1" href="#" data-value="1"></a>
+                                              <a class="star-2" href="#" data-value="2"></a>
+                                              <a class="star-3" href="#" data-value="3"></a>
+                                              <a class="star-4" href="#" data-value="4"></a>
+                                              <a class="star-5" href="#" data-value="5"></a>
+                                            </span>
+                                        </p>
+                                       
+                                    </div>
                                     <div class="gen-socail-share">
                                         <h4 class="align-self-center">Social Share :</h4>
                                         <ul class="social-inner">
@@ -77,7 +92,65 @@
 <!-- Single Video End -->
 @endforeach
 
+<script>
+      $(document).ready(function() {
+        // Fetch the initial rating from the server
+        $.ajax({
+            url: '{{url("/rating/get/".$movie_id."")}}',
+            method: 'GET',
+            success: function(response) {
+                if(response.rating) {
+                    updateStars(response.rating);
+                    $('.myrating').html(response.rating);
+                }
+            }
+        });
 
+        // Handle star click event
+        $('.stars a').on('click', function(e) {
+            e.preventDefault();
+
+            // var rating = $(this).text();
+            var rating = $(this).data('value');
+            var movieId = {{$movie_id}}; 
+            console.log(movieId);
+            console.log(rating);
+
+            // Send the rating to the server
+            if (rating !== undefined) {
+            $.ajax({
+                url: '{{ url("/rating/toggle") }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    movie_id: movieId,
+                    rating: rating
+                },
+                success: function(response) {
+                    if(response.success) {
+                        updateStars(response.rating);
+                        $('.myrating').html(response.rating);
+                    }
+                }
+            });
+        }else{
+            console.log('rating ngga ada');
+        }
+        });
+
+        // Function to update the stars based on the rating
+        function updateStars(rating) {
+            $('.stars a').removeClass('active');
+            $('.stars a').each(function() {
+                if ($(this).data('value') <= rating) {
+                    $(this).addClass('active');
+                }
+            });
+        }
+    });
+       
+   
+</script>
 
 
 @endsection
