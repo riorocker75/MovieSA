@@ -29,14 +29,24 @@ class FrontCtrl extends Controller
     function index(){
         $user_umur = Session::get('umur'); // Example user age
 
-            if ($user_umur < 17) {
+            if ($user_umur < 13) {
                 $data_recom = Film::where('umur', '13')->inRandomOrder()->get();
-            } elseif ($user_umur < 21) {
+            } elseif ($user_umur < 17) {
                 $data_recom = Film::whereIn('umur', ['13', '17'])->inRandomOrder()->get();
             } else {
                 $data_recom = Film::inRandomOrder()->get();
             }
+            // $kategori_umur = [];
 
+            // $kategori_umur = mamdaniCek($user_umur);
+
+            // if ($kategori_umur) {
+            //     $data_recom = Film::whereIn('umur', $kategori_umur)->inRandomOrder()->get();
+            // } else {
+            //     $data_recom = Film::inRandomOrder()->get();
+            // }
+
+        
         $data_film = Film::orderBy('id','desc')->get();
         $data_po = Film::where('cat_id','3')->orderBy('id','desc')->get();
 

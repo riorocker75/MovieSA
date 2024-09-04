@@ -25,7 +25,8 @@
         },
         "files" :[
           "app/Helper/Alert_helper.php",
-          "app/Helper/Format_helper.php"
+          "app/Helper/Format_helper.php",
+          "app/Helper/Mamdani.php"
       ]
     },
     "autoload-dev": {

@@ -6,6 +6,8 @@
     <div class="container-fluid px-0">
        <div class="row no-gutters">
           <div class="col-12">
+       
+                
              <div class="gen-banner-movies banner-style-2">
                 <div class="owl-carousel owl-loaded owl-drag" data-dots="false" data-nav="true" data-desk_num="1"
                    data-lap_num="1" data-tab_num="1" data-mob_num="1" data-mob_sm="1" data-autoplay="true"
@@ -105,6 +107,7 @@
                    
                 </div>
              </div>
+        
           </div>
        </div>
     </div>
@@ -225,7 +228,35 @@
    <div class="container">
       <div class="row">
          <div class="col-xl-6 col-lg-6 col-md-6">
-            <h4 class="gen-heading-title">Paling Populer</h4>
+            @php
+                $mamdani = mamdaniTest("15","17+");
+                $kategori_umur = mamdaniCek('17');
+            @endphp
+            @php
+                  $umur=21;
+               //   $remaja = max(0, min(($umur - 13) / (17 - 13), (17 - $umur) / (17 - 13)));
+                  $dewasaMuda = max(0, min(($umur - 17) / (21 - 17), (21 - $umur) / (21 - 17)));
+                  // $dewasa = max(0, min(($umur - 21) / (25 - 21), 1)); 
+
+                  // if ($remaja > 0) {
+                  //    return ['13'];
+                  // } elseif ($dewasaMuda > 0) {
+                  //    return ['13', '17'];
+                  // } elseif ($dewasa > 0) {
+                  //    return ['13', '17', '21'];
+                  // } else {
+                  //    return [];
+                  // }
+            @endphp
+            <h4 class="gen-heading-title">Paling Populer
+               {{-- {{$mamdani;}} --}}
+            
+             {{-- {{ print_r($kategori_umur);}} --}}
+
+
+    
+
+            </h4>
          </div>
          <div class="col-xl-6 col-lg-6 col-md-6 d-none d-md-inline-block">
             <div class="gen-movie-action">
