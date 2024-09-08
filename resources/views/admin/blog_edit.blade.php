@@ -6,13 +6,13 @@
           <div class="row align-items-center justify-content-between">
             <div class="col-sm-auto">
               <div class="page-header-title">
-                <h5 class="mb-0">Tambah Blog Post</h5>
+                <h5 class="mb-0">Edit Blog Post</h5>
               </div>
             </div>
               <div class="col-sm-auto">
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{{url('/dashboard')}}"><i class="ph-duotone ph-house"></i></a></li>
-                  <li class="breadcrumb-item"><a href="javascript: void(0)">Tambah Blog Post </a></li>
+                  <li class="breadcrumb-item"><a href="javascript: void(0)">Edit Blog Post </a></li>
                 </ul>
             </div>
           </div>
@@ -136,7 +136,7 @@
                       </div>
 
                     </div>
-                    <button type="submit" class="btn btn-primary"> Simpan</button>
+                    <button type="submit" class="btn btn-primary"> Update</button>
 
                 </div>
          

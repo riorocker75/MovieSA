@@ -96,7 +96,7 @@ class AdminCtrl extends Controller
             ]);
         }
 
-        return redirect('/dashboard/admin/all/post')->with('alert-success','Data diri anda sudah terkirim');
+        return redirect('/dashboard/admin/all/post')->with('alert-success','Data sudah terkirim');
 
      }
 
@@ -214,7 +214,7 @@ class AdminCtrl extends Controller
             }
 
         };
-        return redirect('/dashboard/admin/all/post')->with('alert-success','Data diri anda sudah terkirim');
+        return redirect('/dashboard/admin/all/post')->with('alert-success','Data  sudah terkirim');
 
 
 
