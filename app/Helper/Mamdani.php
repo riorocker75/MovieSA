@@ -1,14 +1,15 @@
 <?php
 function mamdaniTest($umur, $kategoriFilm)
 {
-    // Definisikan derajat keanggotaan fuzzy untuk umur
-    $remaja = max(0, min(($umur - 13) / (17 - 13), (17 - $umur) / (17 - 13)));
-    $dewasaMuda = max(0, min(($umur - 17) / (21 - 17), (21 - $umur) / (21 - 17)));
+    // Definisikan derajat keanggotaan fuzzy untuk umur 13+ .17+, 21+
+    $remaja = max(0, min(($umur - 13) / (17 - 13), (17 - $umur) / (17 - 13))); // 13+ sama 17+
+    $dewasaMuda = max(0, min(($umur - 17) / (21 - 17), (21 - $umur) / (21 - 17))); // 117+ sama 21+
     $dewasa = max(0, min(($umur - 21) / (25 - 21), 1));  // Umur di atas 21 dianggap dewasa
 
     // Aturan fuzzy
+    // misal umur 15 tahun
     if ($kategoriFilm == "13+") {
-        $kelayakanBoleh = max($remaja, $dewasaMuda, $dewasa);
+        $kelayakanBoleh = max($remaja, $dewasaMuda, $dewasa);// untuk bisa di tonton dia nilai max lebih besar 0
     } elseif ($kategoriFilm == "17+") {
         $kelayakanBoleh = max($dewasaMuda, $dewasa);
     } elseif ($kategoriFilm == "21+") {

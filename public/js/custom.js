@@ -4,5 +4,5 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     $(".snackbar-top").fadeIn();
-    // $(".snackbar-top").fadeOut(7000).delay(7000);
+    $(".snackbar-top").fadeOut(7000).delay(7000);
 });
