@@ -228,33 +228,8 @@
    <div class="container">
       <div class="row">
          <div class="col-xl-6 col-lg-6 col-md-6">
-            @php
-                $mamdani = mamdaniTest("15","17+");
-                $kategori_umur = mamdaniCek('17');
-            @endphp
-            @php
-                  $umur=21;
-               //   $remaja = max(0, min(($umur - 13) / (17 - 13), (17 - $umur) / (17 - 13)));
-                  $dewasaMuda = max(0, min(($umur - 17) / (21 - 17), (21 - $umur) / (21 - 17)));
-                  // $dewasa = max(0, min(($umur - 21) / (25 - 21), 1)); 
-
-                  // if ($remaja > 0) {
-                  //    return ['13'];
-                  // } elseif ($dewasaMuda > 0) {
-                  //    return ['13', '17'];
-                  // } elseif ($dewasa > 0) {
-                  //    return ['13', '17', '21'];
-                  // } else {
-                  //    return [];
-                  // }
-            @endphp
+          
             <h4 class="gen-heading-title">Paling Populer
-               {{-- {{$mamdani;}} --}}
-            
-             {{-- {{ print_r($kategori_umur);}} --}}
-
-
-    
 
             </h4>
          </div>
