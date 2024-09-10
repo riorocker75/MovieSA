@@ -55,6 +55,7 @@ Route::middleware(['adminLogin'])->group(function () {
 
     // user
     Route::get('/dashboard/admin/user/data', [AdminCtrl::class,'user_data']);
+    Route::get('/dashboard/admin/user/delete/{id}', [AdminCtrl::class,'user_delete']);
 
 
     Route::post('/dashboard/admin/ajax/hapus-eps', [AdminCtrl::class,'hapus_eps']);

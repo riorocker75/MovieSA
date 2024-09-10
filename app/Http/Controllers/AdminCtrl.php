@@ -378,6 +378,8 @@ class AdminCtrl extends Controller
     }
 
     function user_delete($id){
+        Favorit::where('user_id',$id)->delete();
+        Rating::where('user_id',$id)->delete();
         Userdetail::where('user_id',$id)->delete();
         Users::where('id',$id)->delete();
         return redirect('/dashboard/admin/user/data')->with('alert-success','Data Berhasil'); 
